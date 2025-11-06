@@ -1076,7 +1076,7 @@ function filterTasks(status) {
 
 
 // Añadir estilos CSS para animaciones
-const style = document.createElement('style');
+const styleNotifications = document.createElement('style');
 style.textContent = `
   @keyframes slideIn {
     from {
@@ -1110,7 +1110,7 @@ style.textContent = `
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 `;
-document.head.appendChild(style);
+document.head.appendChild(styleNotifications);
 
 // ============================================
 // PROJECT DRAG & DROP HANDLERS
