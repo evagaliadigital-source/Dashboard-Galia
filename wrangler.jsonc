@@ -1,0 +1,28 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "galia-digital-platform",
+  "compatibility_date": "2025-10-24",
+  "pages_build_output_dir": "./dist",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "galia-db",
+      "database_id": "placeholder-for-production"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "DOCUMENTS",
+      "bucket_name": "galia-documents",
+      "preview_bucket_name": "galia-documents-local"
+    },
+    {
+      "binding": "RESOURCES",
+      "bucket_name": "galia-resources",
+      "preview_bucket_name": "galia-resources-local"
+    }
+  ]
+}
