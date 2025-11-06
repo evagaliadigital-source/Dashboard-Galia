@@ -321,7 +321,7 @@ function renderLayout(content) {
           ${renderMenuItem('tasks', '✓', 'Tareas')}
           ${renderMenuItem('calendar', '📅', 'Calendario')}
           ${(isAdmin || isTeam) ? renderMenuItem('resources', '📚', 'Recursos') : ''}
-          ${(isAdmin || isTeam) ? renderMenuItem('documents', '📂', 'Documentos') : ''}
+          ${/* Temporalmente deshabilitado - tabla no existe */ ''}
         </nav>
         
         <div style="padding: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
@@ -1832,11 +1832,12 @@ function navigateTo(view) {
   STATE.currentView = view;
   
   // Para documentos, cargar datos ANTES de renderizar
-  if (view === 'documents' && typeof loadDocuments === 'function') {
-    render(); // Muestra "Cargando carpetas..."
-    loadDocuments(); // Carga datos y hace render() automáticamente cuando termina
-    return;
-  }
+  // Temporalmente deshabilitado - tabla no existe
+  // if (view === 'documents' && typeof loadDocuments === 'function') {
+  //   render(); // Muestra "Cargando carpetas..."
+  //   loadDocuments(); // Carga datos y hace render() automáticamente cuando termina
+  //   return;
+  // }
   
   // Para recursos, cargar datos ANTES de renderizar
   if (view === 'resources' && typeof loadResources === 'function') {
@@ -1977,9 +1978,9 @@ function render() {
     case 'resources':
       content = typeof renderResources === 'function' ? renderResources() : '<div>Cargando recursos...</div>';
       break;
-    case 'documents':
-      content = typeof renderDocuments === 'function' ? renderDocuments() : '<div>Cargando documentos...</div>';
-      break;
+    // case 'documents': // Temporalmente deshabilitado - tabla no existe
+    //   content = typeof renderDocuments === 'function' ? renderDocuments() : '<div>Cargando documentos...</div>';
+    //   break;
     default:
       content = renderDashboard();
   }

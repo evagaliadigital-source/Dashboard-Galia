@@ -12,7 +12,7 @@ import events from './routes/events';
 import dashboard from './routes/dashboard';
 import resources from './routes/resources';
 import folders from './routes/folders';
-import documents from './routes/documents';
+// import documents from './routes/documents'; // Temporalmente deshabilitado - tabla no existe
 import leads from './routes/leads';
 
 const app = new Hono<{ Bindings: Bindings }>();
@@ -33,7 +33,7 @@ app.route('/api/events', events);
 app.route('/api/dashboard', dashboard);
 app.route('/api/resources', resources);
 app.route('/api/folders', folders);
-app.route('/api/documents', documents);
+// app.route('/api/documents', documents); // Temporalmente deshabilitado - tabla no existe
 
 // Main app route
 app.get('/', (c) => {
