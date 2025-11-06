@@ -148,6 +148,100 @@ function showNotification(message, type = 'success') {
 }
 
 // ============================================
+// MODAL FUNCTIONS
+// ============================================
+function showModal(content) {
+  // Remove existing modal if any
+  const existingModal = document.getElementById('globalModal');
+  if (existingModal) {
+    existingModal.remove();
+  }
+  
+  const modalOverlay = document.createElement('div');
+  modalOverlay.id = 'globalModal';
+  modalOverlay.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    animation: fadeIn 0.2s ease;
+  `;
+  
+  const modalContent = document.createElement('div');
+  modalContent.style.cssText = `
+    background: white;
+    border-radius: 0.75rem;
+    padding: 2rem;
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.3s ease;
+    position: relative;
+  `;
+  
+  modalContent.innerHTML = content;
+  modalOverlay.appendChild(modalContent);
+  document.body.appendChild(modalOverlay);
+  
+  // Close on overlay click
+  modalOverlay.addEventListener('click', (e) => {
+    if (e.target === modalOverlay) {
+      closeModal();
+    }
+  });
+  
+  // Close on ESC key
+  const escapeHandler = (e) => {
+    if (e.key === 'Escape') {
+      closeModal();
+      document.removeEventListener('keydown', escapeHandler);
+    }
+  };
+  document.addEventListener('keydown', escapeHandler);
+}
+
+function closeModal() {
+  const modal = document.getElementById('globalModal');
+  if (modal) {
+    modal.style.animation = 'fadeOut 0.2s ease';
+    setTimeout(() => modal.remove(), 200);
+  }
+}
+
+// Add CSS animations
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+  @keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  @keyframes slideIn {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+  }
+  @keyframes slideOut {
+    from { transform: translateX(0); }
+    to { transform: translateX(100%); }
+  }
+`;
+document.head.appendChild(style);
+
+// ============================================
 // RENDER LOGIN
 // ============================================
 function renderLogin() {
