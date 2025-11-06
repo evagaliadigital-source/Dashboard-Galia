@@ -1879,7 +1879,7 @@ async function loadDashboardData() {
       const { data } = await apiCall('/clients/dashboard');
       console.log('Client dashboard:', data);
     } else {
-      const { metrics } = await apiCall('/metrics');
+      const { metrics } = await apiCall('/dashboard/metrics');
       STATE.metrics = metrics;
       
       // Load all data for dashboard
