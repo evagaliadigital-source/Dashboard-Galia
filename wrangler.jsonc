@@ -13,16 +13,16 @@
       "database_id": "f37ff301-d28e-46d9-8e28-025e982d8257"
     }
   ],
-  // "r2_buckets": [
-  //   {
-  //     "binding": "DOCUMENTS",
-  //     "bucket_name": "galia-documents",
-  //     "preview_bucket_name": "galia-documents-local"
-  //   },
-  //   {
-  //     "binding": "RESOURCES",
-  //     "bucket_name": "galia-resources",
-  //     "preview_bucket_name": "galia-resources-local"
-  //   }
-  // ]
+  "r2_buckets": [
+    {
+      "binding": "DOCUMENTS",
+      "bucket_name": "galia-documents",
+      "preview_bucket_name": "galia-documents-local"
+    },
+    {
+      "binding": "RESOURCES",
+      "bucket_name": "galia-resources",
+      "preview_bucket_name": "galia-resources-local"
+    }
+  ]
 }
