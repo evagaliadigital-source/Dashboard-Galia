@@ -96,17 +96,17 @@ app.get('/', (c) => {
             }
         </style>
         
-        <script src="/static/full-app.js"></script>
-        <script src="/static/leads.js"></script>
-        <script src="/static/modals.js"></script>
-        <script src="/static/detail-views.js"></script>
-        <script src="/static/edit-delete.js"></script>
-        <script src="/static/resources-folders.js"></script>
-        <script src="/static/calendar-views.js"></script>
+        <script src="/static/full-app.js?v=20251126"></script>
+        <script src="/static/leads.js?v=20251126"></script>
+        <script src="/static/modals.js?v=20251126"></script>
+        <script src="/static/detail-views.js?v=20251126"></script>
+        <script src="/static/edit-delete.js?v=20251126"></script>
+        <script src="/static/resources-folders.js?v=20251126"></script>
+        <script src="/static/calendar-views.js?v=20251126"></script>
         <!-- <script src="/static/documents.js"></script> --> <!-- Temporalmente deshabilitado -->
-        <script src="/static/resources.js"></script>
-        <script src="/static/ai-assistant.js"></script>
-        <script src="/static/galia-app.js"></script>
+        <script src="/static/resources.js?v=20251126"></script>
+        <script src="/static/ai-assistant.js?v=20251126"></script>
+        <script src="/static/galia-app.js?v=20251126"></script>
     </body>
     </html>
   `);
