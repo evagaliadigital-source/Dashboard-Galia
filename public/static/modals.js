@@ -2074,6 +2074,8 @@ async function createFolder(data) {
       body: JSON.stringify(data)
     });
     showNotification('Carpeta creada exitosamente', 'success');
+    // Limpiar caché de carpetas para forzar recarga
+    STATE.allFolders = null;
     await loadFoldersAndResources(STATE.currentFolderId);
   } catch (error) {
     showNotification('Error al crear carpeta', 'error');
@@ -2087,6 +2089,8 @@ async function updateFolder(id, data) {
       body: JSON.stringify(data)
     });
     showNotification('Carpeta actualizada exitosamente', 'success');
+    // Limpiar caché de carpetas para forzar recarga
+    STATE.allFolders = null;
     await loadFoldersAndResources(STATE.currentFolderId);
   } catch (error) {
     showNotification('Error al actualizar carpeta', 'error');
@@ -2107,6 +2111,8 @@ async function deleteFolder(id) {
     try {
       await apiCall(`/folders/${id}`, { method: 'DELETE' });
       showNotification('Carpeta eliminada exitosamente', 'success');
+      // Limpiar caché de carpetas para forzar recarga
+      STATE.allFolders = null;
       await loadFoldersAndResources(STATE.currentFolderId);
     } catch (error) {
       showNotification(error.message || 'Error al eliminar carpeta', 'error');
