@@ -9,20 +9,18 @@
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "galia-crm-production",
-      "database_id": "f37ff301-d28e-46d9-8e28-025e982d8257"
+      "database_name": "galia-digital-crm-nov26",
+      "database_id": "add7af68-4f3c-4457-b6f0-d4780a9ad5e1"
     }
   ],
   "r2_buckets": [
     {
       "binding": "DOCUMENTS",
-      "bucket_name": "galia-documents",
-      "preview_bucket_name": "galia-documents-local"
+      "bucket_name": "galia-documents"
     },
     {
       "binding": "RESOURCES",
-      "bucket_name": "galia-resources",
-      "preview_bucket_name": "galia-resources-local"
+      "bucket_name": "galia-resources"
     }
   ]
 }
