@@ -98,17 +98,17 @@ app.get('/', (c) => {
             }
         </style>
         
-        <script src="/static/full-app.js?v=20251206"></script>
-        <script src="/static/leads.js?v=20251206"></script>
-        <script src="/static/modals.js?v=20251206"></script>
-        <script src="/static/detail-views.js?v=20251206"></script>
-        <script src="/static/edit-delete.js?v=20251206"></script>
-        <script src="/static/resources-folders.js?v=20251206"></script>
-        <script src="/static/calendar-views.js?v=20251206"></script>
+        <script src="/static/full-app.js?v=20251206b"></script>
+        <script src="/static/leads.js?v=20251206b"></script>
+        <script src="/static/modals.js?v=20251206b"></script>
+        <script src="/static/detail-views.js?v=20251206b"></script>
+        <script src="/static/edit-delete.js?v=20251206b"></script>
+        <script src="/static/resources-folders.js?v=20251206b"></script>
+        <script src="/static/calendar-views.js?v=20251206b"></script>
         <!-- <script src="/static/documents.js"></script> --> <!-- Temporalmente deshabilitado -->
-        <script src="/static/resources.js?v=20251206"></script>
-        <script src="/static/ai-assistant.js?v=20251206"></script>
-        <script src="/static/galia-app.js?v=20251206"></script>
+        <script src="/static/resources.js?v=20251206b"></script>
+        <script src="/static/ai-assistant.js?v=20251206b"></script>
+        <script src="/static/galia-app.js?v=20251206b"></script>
     </body>
     </html>
   `);

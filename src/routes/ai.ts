@@ -12,6 +12,7 @@ app.post('/chat', async (c) => {
   try {
     const { message, context } = await c.req.json();
     const env = c.env as any;
+    const user = c.get('user');
     
     if (!message || typeof message !== 'string') {
       return c.json({ error: 'Mensaje inválido' }, 400);
@@ -50,17 +51,67 @@ Ayudar a Eva (fundadora de Galia Digital) con:
 💼 Gestión de proyectos y tareas
 📈 Métricas y KPIs
 ⏰ Seguimiento y recordatorios
+✨ CREAR tareas, proyectos y eventos cuando Eva te lo pida
 
 CONTEXTO ACTUAL DEL NEGOCIO:
 ${contextSummary}
 
+🔧 CAPACIDADES ESPECIALES - PUEDES CREAR COSAS:
+
+Cuando Eva te pida crear tareas/proyectos/eventos, responde con JSON en este formato:
+
+**PARA CREAR TAREAS:**
+{
+  "action": "create_tasks",
+  "items": [
+    {
+      "title": "Llamar a Peluquería Bella Vista",
+      "description": "Seguimiento propuesta comercial",
+      "due_date": "2025-12-15",
+      "priority": "urgent",
+      "status": "pending"
+    }
+  ]
+}
+
+**PARA CREAR PROYECTOS:**
+{
+  "action": "create_projects",
+  "items": [
+    {
+      "name": "Campaña Navidad Bella Vista",
+      "description": "Campaña redes sociales diciembre",
+      "status": "pending",
+      "type": "marketing"
+    }
+  ]
+}
+
+**PARA CREAR EVENTOS:**
+{
+  "action": "create_events",
+  "items": [
+    {
+      "title": "Reunión Bella Vista",
+      "description": "Presentación propuesta",
+      "start_date": "2025-12-15T10:00:00",
+      "end_date": "2025-12-15T11:00:00",
+      "event_type": "meeting"
+    }
+  ]
+}
+
+DETECCIÓN AUTOMÁTICA:
+- Fechas: "hoy", "mañana", "15 dic", "próxima semana" → convierte a ISO date
+- Prioridades: "urgente", "importante" → "urgent", resto → "high" o "medium"
+- Si no especifica fecha → usa null
+
 REGLAS DE RESPUESTA:
-1. Máximo 200 palabras (sé conciso)
-2. Usa HTML para formato: <strong>, <br>, bullets con •
-3. Siempre incluye un emoji relevante al inicio
+1. Si detectas que pide CREAR algo → responde SOLO con el JSON (sin texto adicional)
+2. Si es conversación normal → máximo 200 palabras con HTML
+3. Usa emojis estratégicamente
 4. Si hay leads HOT, menciónalos primero
 5. Da consejos accionables, no teoría
-6. Formato: Emoji + Título + Análisis + Recomendación concreta
 
 Ejemplo de buena respuesta:
 🔥 <strong>PRIORIDAD MÁXIMA</strong><br><br>
@@ -113,6 +164,32 @@ Tu ratio de conversión está en <strong>25%</strong> - buen ritmo. Mantén el f
       }, 500);
     }
 
+    // Check if AI wants to create something (JSON response)
+    let parsedAction = null;
+    try {
+      // Try to parse JSON from AI response
+      const jsonMatch = aiMessage.match(/\{[\s\S]*\}/);
+      if (jsonMatch) {
+        parsedAction = JSON.parse(jsonMatch[0]);
+      }
+    } catch (e) {
+      // Not JSON, it's a normal message
+    }
+
+    // If AI returned an action, execute it
+    if (parsedAction && parsedAction.action) {
+      const result = await executeAction(parsedAction, env, user.id);
+      
+      return c.json({
+        message: result.message,
+        action: parsedAction.action,
+        created: result.created,
+        model: 'gpt-4o-mini',
+        timestamp: new Date().toISOString()
+      });
+    }
+
+    // Normal conversational response
     return c.json({
       message: aiMessage,
       model: 'gpt-4o-mini',
@@ -127,6 +204,95 @@ Tu ratio de conversión está en <strong>25%</strong> - buen ritmo. Mantén el f
     }, 500);
   }
 });
+
+// Execute action (create tasks, projects, events)
+async function executeAction(action: any, env: any, userId: number) {
+  const db = env.DB;
+  const created: any[] = [];
+
+  try {
+    if (action.action === 'create_tasks' && action.items) {
+      for (const task of action.items) {
+        const result = await db.prepare(`
+          INSERT INTO tasks (title, description, due_date, priority, status, assigned_to, created_by)
+          VALUES (?, ?, ?, ?, ?, ?, ?)
+        `).bind(
+          task.title,
+          task.description || null,
+          task.due_date || null,
+          task.priority || 'medium',
+          task.status || 'pending',
+          userId,
+          userId
+        ).run();
+        
+        created.push({ type: 'task', id: result.meta.last_row_id, title: task.title });
+      }
+      
+      return {
+        message: `✅ <strong>${created.length} tarea${created.length > 1 ? 's' : ''} creada${created.length > 1 ? 's' : ''} exitosamente</strong><br><br>${created.map(t => `• ${t.title}`).join('<br>')}`,
+        created
+      };
+    }
+
+    if (action.action === 'create_projects' && action.items) {
+      for (const project of action.items) {
+        const result = await db.prepare(`
+          INSERT INTO projects (name, description, status, type, created_by)
+          VALUES (?, ?, ?, ?, ?)
+        `).bind(
+          project.name,
+          project.description || null,
+          project.status || 'pending',
+          project.type || 'other',
+          userId
+        ).run();
+        
+        created.push({ type: 'project', id: result.meta.last_row_id, name: project.name });
+      }
+      
+      return {
+        message: `✅ <strong>${created.length} proyecto${created.length > 1 ? 's' : ''} creado${created.length > 1 ? 's' : ''} exitosamente</strong><br><br>${created.map(p => `• ${p.name}`).join('<br>')}`,
+        created
+      };
+    }
+
+    if (action.action === 'create_events' && action.items) {
+      for (const event of action.items) {
+        const result = await db.prepare(`
+          INSERT INTO events (title, description, start_date, end_date, event_type, created_by)
+          VALUES (?, ?, ?, ?, ?, ?)
+        `).bind(
+          event.title,
+          event.description || null,
+          event.start_date,
+          event.end_date || event.start_date,
+          event.event_type || 'meeting',
+          userId
+        ).run();
+        
+        created.push({ type: 'event', id: result.meta.last_row_id, title: event.title });
+      }
+      
+      return {
+        message: `✅ <strong>${created.length} evento${created.length > 1 ? 's' : ''} creado${created.length > 1 ? 's' : ''} exitosamente</strong><br><br>${created.map(e => `• ${e.title}`).join('<br>')}`,
+        created
+      };
+    }
+
+    return {
+      message: '❌ Acción no reconocida',
+      created: []
+    };
+
+  } catch (error: any) {
+    console.error('Error ejecutando acción:', error);
+    return {
+      message: `❌ <strong>Error al crear:</strong> ${error.message}`,
+      created: []
+    };
+  }
+}
 
 // Helper function to prepare context summary
 function prepareContextSummary(context: any): string {

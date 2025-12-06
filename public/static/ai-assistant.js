@@ -452,6 +452,23 @@ async function getAIResponse(userMessage) {
     }
 
     const data = await response.json();
+    
+    // If AI created something, reload the appropriate data
+    if (data.action && data.created && data.created.length > 0) {
+      if (data.action === 'create_tasks') {
+        await loadTasks(); // Reload tasks
+      } else if (data.action === 'create_projects') {
+        await loadProjects(); // Reload projects
+      } else if (data.action === 'create_events') {
+        await loadEvents(); // Reload events
+      }
+      
+      // Refresh current view if needed
+      if (STATE.currentView === 'tasks' || STATE.currentView === 'projects' || STATE.currentView === 'calendar') {
+        render();
+      }
+    }
+    
     return data.message || 'Sin respuesta de GAL IA';
 
   } catch (error) {
