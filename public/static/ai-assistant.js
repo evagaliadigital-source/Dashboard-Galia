@@ -461,10 +461,12 @@ async function getAIResponse(userMessage) {
         await loadProjects(); // Reload projects
       } else if (data.action === 'create_events') {
         await loadEvents(); // Reload events
+      } else if (data.action === 'create_notes') {
+        if (typeof loadNotes === 'function') await loadNotes(); // Reload notes
       }
       
       // Refresh current view if needed
-      if (STATE.currentView === 'tasks' || STATE.currentView === 'projects' || STATE.currentView === 'calendar') {
+      if (STATE.currentView === 'tasks' || STATE.currentView === 'projects' || STATE.currentView === 'calendar' || STATE.currentView === 'notes') {
         render();
       }
     }

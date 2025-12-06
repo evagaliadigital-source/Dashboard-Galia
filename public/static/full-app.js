@@ -11,6 +11,7 @@ const STATE = {
   projects: [],
   tasks: [],
   events: [],
+  notes: [],
   metrics: null,
   selectedItem: null,
   projectFilters: {
@@ -18,6 +19,11 @@ const STATE = {
     search: '',
     status: '',
     priority: ''
+  },
+  notesFilters: {
+    category: 'all',
+    search: '',
+    pinned_only: false
   }
 };
 
@@ -320,6 +326,7 @@ function renderLayout(content) {
           ${renderMenuItem('projects', '📁', 'Proyectos')}
           ${renderMenuItem('tasks', '✓', 'Tareas')}
           ${renderMenuItem('calendar', '📅', 'Calendario')}
+          ${renderMenuItem('notes', '📝', 'Notas')}
           ${(isAdmin || isTeam) ? renderMenuItem('resources', '📚', 'Recursos') : ''}
           ${/* Temporalmente deshabilitado - tabla no existe */ ''}
         </nav>
@@ -1866,6 +1873,9 @@ function navigateTo(view) {
     case 'calendar':
       loadEvents();
       break;
+    case 'notes':
+      if (typeof loadNotes === 'function') loadNotes();
+      break;
   }
 }
 
@@ -1974,6 +1984,9 @@ function render() {
       break;
     case 'calendar':
       content = renderCalendar();
+      break;
+    case 'notes':
+      content = typeof renderNotesView === 'function' ? renderNotesView() : '<div>Cargando notas...</div>';
       break;
     case 'resources':
       content = typeof renderResources === 'function' ? renderResources() : '<div>Cargando recursos...</div>';

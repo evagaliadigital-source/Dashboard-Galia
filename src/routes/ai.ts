@@ -101,13 +101,41 @@ Cuando Eva te pida crear tareas/proyectos/eventos, responde con JSON en este for
   ]
 }
 
+**PARA CREAR NOTAS:**
+{
+  "action": "create_notes",
+  "items": [
+    {
+      "title": "Estrategia prospección",
+      "content": "Contactar leads HOT martes/jueves 10-12h",
+      "category": "estrategia",
+      "priority": "high",
+      "tags": ["ventas", "prospección"]
+    }
+  ]
+}
+
+**PARA BUSCAR NOTAS:**
+{
+  "action": "search_notes",
+  "query": "estrategia",
+  "category": "estrategia",
+  "limit": 5
+}
+
 DETECCIÓN AUTOMÁTICA:
 - Fechas: "hoy", "mañana", "15 dic", "próxima semana" → convierte a ISO date
-- Prioridades: "urgente", "importante" → "urgent", resto → "high" o "medium"
+- Prioridades: "urgente", "importante" → "urgent"/"high", resto → "medium"
+- Categorías notas: "estrategia", "reunion", "llamada", "idea", "seguimiento", "otro"
 - Si no especifica fecha → usa null
 
+COMANDOS DE NOTAS:
+- "guarda esto", "anota", "nota importante" → crea nota
+- "busca notas sobre X", "muéstrame notas de X" → busca notas
+- Auto-detecta categoría del contenido
+
 REGLAS DE RESPUESTA:
-1. Si detectas que pide CREAR algo → responde SOLO con el JSON (sin texto adicional)
+1. Si detectas que pide CREAR/BUSCAR algo → responde SOLO con el JSON (sin texto adicional)
 2. Si es conversación normal → máximo 200 palabras con HTML
 3. Usa emojis estratégicamente
 4. Si hay leads HOT, menciónalos primero
@@ -277,6 +305,72 @@ async function executeAction(action: any, env: any, userId: number) {
       return {
         message: `✅ <strong>${created.length} evento${created.length > 1 ? 's' : ''} creado${created.length > 1 ? 's' : ''} exitosamente</strong><br><br>${created.map(e => `• ${e.title}`).join('<br>')}`,
         created
+      };
+    }
+
+    if (action.action === 'create_notes' && action.items) {
+      for (const note of action.items) {
+        const result = await db.prepare(`
+          INSERT INTO notes (title, content, category, priority, tags, created_by)
+          VALUES (?, ?, ?, ?, ?, ?)
+        `).bind(
+          note.title,
+          note.content,
+          note.category || 'otro',
+          note.priority || 'medium',
+          note.tags ? JSON.stringify(note.tags) : null,
+          userId
+        ).run();
+        
+        created.push({ type: 'note', id: result.meta.last_row_id, title: note.title });
+      }
+      
+      return {
+        message: `✅ <strong>${created.length} nota${created.length > 1 ? 's' : ''} guardada${created.length > 1 ? 's' : ''} exitosamente</strong><br><br>${created.map(n => `📝 ${n.title}`).join('<br>')}`,
+        created
+      };
+    }
+
+    if (action.action === 'search_notes') {
+      const searchQuery = action.query || '';
+      const category = action.category || null;
+      const limit = action.limit || 10;
+
+      let query = `SELECT * FROM notes WHERE created_by = ?`;
+      const params: any[] = [userId];
+
+      if (searchQuery) {
+        query += ` AND (title LIKE ? OR content LIKE ? OR tags LIKE ?)`;
+        const searchTerm = `%${searchQuery}%`;
+        params.push(searchTerm, searchTerm, searchTerm);
+      }
+
+      if (category) {
+        query += ` AND category = ?`;
+        params.push(category);
+      }
+
+      query += ` ORDER BY is_pinned DESC, created_at DESC LIMIT ?`;
+      params.push(limit);
+
+      const { results } = await db.prepare(query).bind(...params).all();
+
+      if (results.length === 0) {
+        return {
+          message: `📝 No encontré notas sobre "${searchQuery}"`,
+          created: []
+        };
+      }
+
+      const notesList = results.map((n: any) => 
+        `📝 <strong>${n.title}</strong>${n.is_pinned ? ' 📌' : ''}<br>
+         <em>${n.content.substring(0, 100)}${n.content.length > 100 ? '...' : ''}</em><br>
+         <small>Categoría: ${n.category} | ${new Date(n.created_at).toLocaleDateString('es-ES')}</small>`
+      ).join('<br><br>');
+
+      return {
+        message: `📝 <strong>Encontré ${results.length} nota${results.length > 1 ? 's' : ''}</strong><br><br>${notesList}`,
+        created: results
       };
     }
 

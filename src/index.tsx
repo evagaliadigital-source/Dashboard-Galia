@@ -15,6 +15,7 @@ import folders from './routes/folders';
 // import documents from './routes/documents'; // Temporalmente deshabilitado - tabla no existe
 import leads from './routes/leads';
 import ai from './routes/ai';
+import notes from './routes/notes';
 
 const app = new Hono<{ Bindings: Bindings }>();
 
@@ -35,6 +36,7 @@ app.route('/api/dashboard', dashboard);
 app.route('/api/resources', resources);
 app.route('/api/folders', folders);
 app.route('/api/ai', ai);
+app.route('/api/notes', notes);
 // app.route('/api/documents', documents); // Temporalmente deshabilitado - tabla no existe
 
 // Main app route
@@ -98,17 +100,18 @@ app.get('/', (c) => {
             }
         </style>
         
-        <script src="/static/full-app.js?v=20251206b"></script>
-        <script src="/static/leads.js?v=20251206b"></script>
-        <script src="/static/modals.js?v=20251206b"></script>
-        <script src="/static/detail-views.js?v=20251206b"></script>
-        <script src="/static/edit-delete.js?v=20251206b"></script>
-        <script src="/static/resources-folders.js?v=20251206b"></script>
-        <script src="/static/calendar-views.js?v=20251206b"></script>
+        <script src="/static/full-app.js?v=20251206c"></script>
+        <script src="/static/leads.js?v=20251206c"></script>
+        <script src="/static/modals.js?v=20251206c"></script>
+        <script src="/static/detail-views.js?v=20251206c"></script>
+        <script src="/static/edit-delete.js?v=20251206c"></script>
+        <script src="/static/resources-folders.js?v=20251206c"></script>
+        <script src="/static/calendar-views.js?v=20251206c"></script>
         <!-- <script src="/static/documents.js"></script> --> <!-- Temporalmente deshabilitado -->
-        <script src="/static/resources.js?v=20251206b"></script>
-        <script src="/static/ai-assistant.js?v=20251206b"></script>
-        <script src="/static/galia-app.js?v=20251206b"></script>
+        <script src="/static/resources.js?v=20251206c"></script>
+        <script src="/static/notes.js?v=20251206c"></script>
+        <script src="/static/ai-assistant.js?v=20251206c"></script>
+        <script src="/static/galia-app.js?v=20251206c"></script>
     </body>
     </html>
   `);
