@@ -418,10 +418,53 @@ function getWelcomeMessage() {
 }
 
 // ============================================================================
-// GET AI RESPONSE (Intelligent Analysis)
+// GET AI RESPONSE (Real OpenAI Integration)
 // ============================================================================
 
 async function getAIResponse(userMessage) {
+  try {
+    // Prepare context from dashboard
+    const context = {
+      leads: STATE.leads || [],
+      projects: STATE.projects || [],
+      tasks: STATE.tasks || [],
+      clients: STATE.clients || [],
+      metrics: STATE.metrics || {}
+    };
+
+    // Call backend API
+    const response = await fetch('/api/ai/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      },
+      body: JSON.stringify({
+        message: userMessage,
+        context: context
+      })
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error('Error de API:', errorData);
+      return `❌ <strong>Error al conectar con GAL IA</strong><br><br>${errorData.error || 'Error desconocido'}`;
+    }
+
+    const data = await response.json();
+    return data.message || 'Sin respuesta de GAL IA';
+
+  } catch (error) {
+    console.error('Error en getAIResponse:', error);
+    return `❌ <strong>Error de conexión</strong><br><br>No se pudo conectar con GAL IA. Verifica tu conexión e intenta de nuevo.`;
+  }
+}
+
+// ============================================================================
+// FALLBACK: OLD RESPONSE SYSTEM (Backup si falla API)
+// ============================================================================
+
+async function getAIResponseOLD(userMessage) {
   const message = userMessage.toLowerCase();
   
   // Analizar contexto del dashboard
