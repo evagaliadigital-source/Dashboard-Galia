@@ -438,7 +438,7 @@ function renderDashboard() {
           onclick="showNewClientModal()" 
           style="
             background: white;
-            border: 2px solid #E5E7EB;
+            border: 2px solid #8B5CF6;
             padding: 1.25rem 1.5rem;
             border-radius: 12px;
             cursor: pointer;
@@ -449,15 +449,16 @@ function renderDashboard() {
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 2px 8px rgba(139, 92, 246, 0.1);
           "
           onmouseover="
-            this.style.borderColor = '#8B5CF6';
-            this.style.boxShadow = '0 8px 16px rgba(139, 92, 246, 0.15)';
+            this.style.borderColor = '#7C3AED';
+            this.style.boxShadow = '0 8px 20px rgba(139, 92, 246, 0.25)';
             this.style.transform = 'translateY(-2px)';
           "
           onmouseout="
-            this.style.borderColor = '#E5E7EB';
-            this.style.boxShadow = 'none';
+            this.style.borderColor = '#8B5CF6';
+            this.style.boxShadow = '0 2px 8px rgba(139, 92, 246, 0.1)';
             this.style.transform = 'translateY(0)';
           "
         >
@@ -483,7 +484,7 @@ function renderDashboard() {
           onclick="showNewProjectModal()" 
           style="
             background: white;
-            border: 2px solid #E5E7EB;
+            border: 2px solid #8B5CF6;
             padding: 1.25rem 1.5rem;
             border-radius: 12px;
             cursor: pointer;
@@ -494,15 +495,16 @@ function renderDashboard() {
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 2px 8px rgba(139, 92, 246, 0.1);
           "
           onmouseover="
-            this.style.borderColor = '#8B5CF6';
-            this.style.boxShadow = '0 8px 16px rgba(139, 92, 246, 0.15)';
+            this.style.borderColor = '#7C3AED';
+            this.style.boxShadow = '0 8px 20px rgba(139, 92, 246, 0.25)';
             this.style.transform = 'translateY(-2px)';
           "
           onmouseout="
-            this.style.borderColor = '#E5E7EB';
-            this.style.boxShadow = 'none';
+            this.style.borderColor = '#8B5CF6';
+            this.style.boxShadow = '0 2px 8px rgba(139, 92, 246, 0.1)';
             this.style.transform = 'translateY(0)';
           "
         >
@@ -528,7 +530,7 @@ function renderDashboard() {
           onclick="showNewEventModal()" 
           style="
             background: white;
-            border: 2px solid #E5E7EB;
+            border: 2px solid #8B5CF6;
             padding: 1.25rem 1.5rem;
             border-radius: 12px;
             cursor: pointer;
@@ -539,15 +541,16 @@ function renderDashboard() {
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 2px 8px rgba(139, 92, 246, 0.1);
           "
           onmouseover="
-            this.style.borderColor = '#8B5CF6';
-            this.style.boxShadow = '0 8px 16px rgba(139, 92, 246, 0.15)';
+            this.style.borderColor = '#7C3AED';
+            this.style.boxShadow = '0 8px 20px rgba(139, 92, 246, 0.25)';
             this.style.transform = 'translateY(-2px)';
           "
           onmouseout="
-            this.style.borderColor = '#E5E7EB';
-            this.style.boxShadow = 'none';
+            this.style.borderColor = '#8B5CF6';
+            this.style.boxShadow = '0 2px 8px rgba(139, 92, 246, 0.1)';
             this.style.transform = 'translateY(0)';
           "
         >

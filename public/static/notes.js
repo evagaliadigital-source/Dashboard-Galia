@@ -63,15 +63,41 @@ function renderNotesView() {
 
   return `
     <div class="p-6">
-      <!-- Header -->
-      <div class="flex justify-between items-center mb-6">
-        <div>
-          <h2 class="text-2xl font-bold text-gray-800">📝 Notas</h2>
-          <p class="text-sm text-gray-600 mt-1">${filteredNotes.length} nota${filteredNotes.length !== 1 ? 's' : ''}</p>
-        </div>
-        <button onclick="showCreateNoteModal()" class="px-4 py-2 bg-galia-purple text-white rounded-lg hover:bg-opacity-90 transition">
-          <i class="fas fa-plus mr-2"></i>Nueva Nota
+      <!-- Header con Botón Retroceder -->
+      <div class="mb-6">
+        <button 
+          onclick="STATE.currentView = 'dashboard'; render();" 
+          style="
+            background: white;
+            border: 2px solid #8B5CF6;
+            color: #8B5CF6;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.2s ease;
+          "
+          onmouseover="this.style.background = '#8B5CF6'; this.style.color = 'white';"
+          onmouseout="this.style.background = 'white'; this.style.color = '#8B5CF6';"
+        >
+          <i class="fas fa-arrow-left"></i>
+          Volver
         </button>
+        
+        <div class="flex justify-between items-center">
+          <div>
+            <h2 class="text-2xl font-bold text-gray-800">📝 Notas</h2>
+            <p class="text-sm text-gray-600 mt-1">${filteredNotes.length} nota${filteredNotes.length !== 1 ? 's' : ''}</p>
+          </div>
+          <button onclick="showCreateNoteModal()" class="px-4 py-2 bg-galia-purple text-white rounded-lg hover:bg-opacity-90 transition">
+            <i class="fas fa-plus mr-2"></i>Nueva Nota
+          </button>
+        </div>
       </div>
 
       <!-- Filters -->
