@@ -431,29 +431,140 @@ function renderDashboard() {
     </div>
     
     ${isAdmin ? `
-      <!-- Acciones Rápidas -->
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
-        <button onclick="showNewClientModal()" style="background: linear-gradient(135deg, #572c83 0%, #08a48d 100%); color: white; padding: 1.5rem; border-radius: 0.75rem; border: none; cursor: pointer; display: flex; align-items: center; gap: 1rem; text-align: left;">
-          <span style="font-size: 2rem;">👤</span>
-          <div>
-            <div style="font-weight: 600; font-size: 1.125rem;">Nuevo Cliente</div>
-            <div style="font-size: 0.875rem; opacity: 0.9;">Registrar peluquería</div>
+      <!-- Acciones Rápidas - Diseño Elegante -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+        <!-- Nuevo Cliente -->
+        <button 
+          onclick="showNewClientModal()" 
+          style="
+            background: white;
+            border: 2px solid #E5E7EB;
+            padding: 1.25rem 1.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-align: left;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+          "
+          onmouseover="
+            this.style.borderColor = '#8B5CF6';
+            this.style.boxShadow = '0 8px 16px rgba(139, 92, 246, 0.15)';
+            this.style.transform = 'translateY(-2px)';
+          "
+          onmouseout="
+            this.style.borderColor = '#E5E7EB';
+            this.style.boxShadow = 'none';
+            this.style.transform = 'translateY(0)';
+          "
+        >
+          <div style="
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+          ">👤</div>
+          <div style="flex: 1;">
+            <div style="font-weight: 600; font-size: 1rem; color: #1F2937; margin-bottom: 0.25rem;">Nuevo Cliente</div>
+            <div style="font-size: 0.875rem; color: #6B7280;">Registrar peluquería</div>
           </div>
         </button>
         
-        <button onclick="showNewProjectModal()" style="background: linear-gradient(135deg, #572c83 0%, #08a48d 100%); color: white; padding: 1.5rem; border-radius: 0.75rem; border: none; cursor: pointer; display: flex; align-items: center; gap: 1rem; text-align: left;">
-          <span style="font-size: 2rem;">📁</span>
-          <div>
-            <div style="font-weight: 600; font-size: 1.125rem;">Nuevo Proyecto</div>
-            <div style="font-size: 0.875rem; opacity: 0.9;">Crear campaña</div>
+        <!-- Nuevo Proyecto -->
+        <button 
+          onclick="showNewProjectModal()" 
+          style="
+            background: white;
+            border: 2px solid #E5E7EB;
+            padding: 1.25rem 1.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-align: left;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+          "
+          onmouseover="
+            this.style.borderColor = '#8B5CF6';
+            this.style.boxShadow = '0 8px 16px rgba(139, 92, 246, 0.15)';
+            this.style.transform = 'translateY(-2px)';
+          "
+          onmouseout="
+            this.style.borderColor = '#E5E7EB';
+            this.style.boxShadow = 'none';
+            this.style.transform = 'translateY(0)';
+          "
+        >
+          <div style="
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+          ">📁</div>
+          <div style="flex: 1;">
+            <div style="font-weight: 600; font-size: 1rem; color: #1F2937; margin-bottom: 0.25rem;">Nuevo Proyecto</div>
+            <div style="font-size: 0.875rem; color: #6B7280;">Crear campaña</div>
           </div>
         </button>
         
-        <button onclick="showNewEventModal()" style="background: linear-gradient(135deg, #572c83 0%, #08a48d 100%); color: white; padding: 1.5rem; border-radius: 0.75rem; border: none; cursor: pointer; display: flex; align-items: center; gap: 1rem; text-align: left;">
-          <span style="font-size: 2rem;">📅</span>
-          <div>
-            <div style="font-weight: 600; font-size: 1.125rem;">Nueva Reunión</div>
-            <div style="font-size: 0.875rem; opacity: 0.9;">Agendar evento</div>
+        <!-- Nueva Reunión -->
+        <button 
+          onclick="showNewEventModal()" 
+          style="
+            background: white;
+            border: 2px solid #E5E7EB;
+            padding: 1.25rem 1.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-align: left;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+          "
+          onmouseover="
+            this.style.borderColor = '#8B5CF6';
+            this.style.boxShadow = '0 8px 16px rgba(139, 92, 246, 0.15)';
+            this.style.transform = 'translateY(-2px)';
+          "
+          onmouseout="
+            this.style.borderColor = '#E5E7EB';
+            this.style.boxShadow = 'none';
+            this.style.transform = 'translateY(0)';
+          "
+        >
+          <div style="
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+          ">📅</div>
+          <div style="flex: 1;">
+            <div style="font-weight: 600; font-size: 1rem; color: #1F2937; margin-bottom: 0.25rem;">Nueva Reunión</div>
+            <div style="font-size: 0.875rem; color: #6B7280;">Agendar evento</div>
           </div>
         </button>
       </div>
