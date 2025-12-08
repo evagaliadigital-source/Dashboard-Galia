@@ -69,8 +69,8 @@ function renderNotesView() {
           onclick="STATE.currentView = 'dashboard'; render();" 
           style="
             background: white;
-            border: 2px solid #8B5CF6;
-            color: #8B5CF6;
+            border: 2px solid #572c83;
+            color: #572c83;
             padding: 0.5rem 1rem;
             border-radius: 8px;
             cursor: pointer;
@@ -82,8 +82,8 @@ function renderNotesView() {
             margin-bottom: 1rem;
             transition: all 0.2s ease;
           "
-          onmouseover="this.style.background = '#8B5CF6'; this.style.color = 'white';"
-          onmouseout="this.style.background = 'white'; this.style.color = '#8B5CF6';"
+          onmouseover="this.style.background = '#572c83'; this.style.color = 'white';"
+          onmouseout="this.style.background = 'white'; this.style.color = '#572c83';"
         >
           <i class="fas fa-arrow-left"></i>
           Volver

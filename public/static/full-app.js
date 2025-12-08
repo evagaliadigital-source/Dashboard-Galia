@@ -438,7 +438,7 @@ function renderDashboard() {
           onclick="showNewClientModal()" 
           style="
             background: white;
-            border: 2px solid #8B5CF6;
+            border: 2px solid #572c83;
             padding: 1.25rem 1.5rem;
             border-radius: 12px;
             cursor: pointer;
@@ -449,23 +449,23 @@ function renderDashboard() {
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(139, 92, 246, 0.1);
+            box-shadow: 0 2px 8px rgba(87, 44, 131, 0.1);
           "
           onmouseover="
-            this.style.borderColor = '#7C3AED';
-            this.style.boxShadow = '0 8px 20px rgba(139, 92, 246, 0.25)';
+            this.style.borderColor = '#3d1f5c';
+            this.style.boxShadow = '0 8px 20px rgba(87, 44, 131, 0.25)';
             this.style.transform = 'translateY(-2px)';
           "
           onmouseout="
-            this.style.borderColor = '#8B5CF6';
-            this.style.boxShadow = '0 2px 8px rgba(139, 92, 246, 0.1)';
+            this.style.borderColor = '#572c83';
+            this.style.boxShadow = '0 2px 8px rgba(87, 44, 131, 0.1)';
             this.style.transform = 'translateY(0)';
           "
         >
           <div style="
             width: 48px;
             height: 48px;
-            background: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 100%);
+            background: linear-gradient(135deg, #572c83 0%, #08a48d 100%);
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -484,7 +484,7 @@ function renderDashboard() {
           onclick="showNewProjectModal()" 
           style="
             background: white;
-            border: 2px solid #8B5CF6;
+            border: 2px solid #572c83;
             padding: 1.25rem 1.5rem;
             border-radius: 12px;
             cursor: pointer;
@@ -495,23 +495,23 @@ function renderDashboard() {
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(139, 92, 246, 0.1);
+            box-shadow: 0 2px 8px rgba(87, 44, 131, 0.1);
           "
           onmouseover="
-            this.style.borderColor = '#7C3AED';
-            this.style.boxShadow = '0 8px 20px rgba(139, 92, 246, 0.25)';
+            this.style.borderColor = '#3d1f5c';
+            this.style.boxShadow = '0 8px 20px rgba(87, 44, 131, 0.25)';
             this.style.transform = 'translateY(-2px)';
           "
           onmouseout="
-            this.style.borderColor = '#8B5CF6';
-            this.style.boxShadow = '0 2px 8px rgba(139, 92, 246, 0.1)';
+            this.style.borderColor = '#572c83';
+            this.style.boxShadow = '0 2px 8px rgba(87, 44, 131, 0.1)';
             this.style.transform = 'translateY(0)';
           "
         >
           <div style="
             width: 48px;
             height: 48px;
-            background: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 100%);
+            background: linear-gradient(135deg, #572c83 0%, #08a48d 100%);
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -530,7 +530,7 @@ function renderDashboard() {
           onclick="showNewEventModal()" 
           style="
             background: white;
-            border: 2px solid #8B5CF6;
+            border: 2px solid #572c83;
             padding: 1.25rem 1.5rem;
             border-radius: 12px;
             cursor: pointer;
@@ -541,23 +541,23 @@ function renderDashboard() {
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(139, 92, 246, 0.1);
+            box-shadow: 0 2px 8px rgba(87, 44, 131, 0.1);
           "
           onmouseover="
-            this.style.borderColor = '#7C3AED';
-            this.style.boxShadow = '0 8px 20px rgba(139, 92, 246, 0.25)';
+            this.style.borderColor = '#3d1f5c';
+            this.style.boxShadow = '0 8px 20px rgba(87, 44, 131, 0.25)';
             this.style.transform = 'translateY(-2px)';
           "
           onmouseout="
-            this.style.borderColor = '#8B5CF6';
-            this.style.boxShadow = '0 2px 8px rgba(139, 92, 246, 0.1)';
+            this.style.borderColor = '#572c83';
+            this.style.boxShadow = '0 2px 8px rgba(87, 44, 131, 0.1)';
             this.style.transform = 'translateY(0)';
           "
         >
           <div style="
             width: 48px;
             height: 48px;
-            background: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 100%);
+            background: linear-gradient(135deg, #572c83 0%, #08a48d 100%);
             border-radius: 12px;
             display: flex;
             align-items: center;
