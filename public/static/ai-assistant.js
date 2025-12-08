@@ -297,6 +297,7 @@ function renderAIMessages() {
         </div>
       `;
     } else {
+      const messageId = msg.timestamp || Date.now();
       return `
         <div style="display: flex; gap: 0.75rem; margin-bottom: 1rem;">
           <div style="width: 36px; height: 36px; background: linear-gradient(135deg, #E91E8C 0%, #9B4DCA 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0;">
@@ -305,6 +306,16 @@ function renderAIMessages() {
           <div style="background: #F3F4F6; padding: 0.75rem 1rem; border-radius: 1rem 1rem 1rem 0.25rem; max-width: 80%; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
             <div style="color: #1F2937; font-size: 0.875rem; line-height: 1.6;">
               ${msg.content}
+            </div>
+            <div style="margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid #E5E7EB;">
+              <button 
+                onclick="saveAIConversationAsNote('${messageId}')" 
+                style="background: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 100%); color: white; border: none; padding: 0.375rem 0.75rem; border-radius: 0.5rem; font-size: 0.75rem; cursor: pointer; font-weight: 500; display: flex; align-items: center; gap: 0.25rem; transition: all 0.2s ease;"
+                onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 4px 8px rgba(139, 92, 246, 0.3)'"
+                onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'"
+              >
+                💾 Guardar como nota
+              </button>
             </div>
           </div>
         </div>
@@ -383,18 +394,20 @@ function askAI(question) {
 // ============================================================================
 
 function addUserMessage(content) {
+  const timestamp = Date.now();
   STATE.aiAssistant.messages.push({
     role: 'user',
     content: content,
-    timestamp: new Date().toISOString()
+    timestamp: timestamp
   });
 }
 
 function addAIMessage(content) {
+  const timestamp = Date.now();
   STATE.aiAssistant.messages.push({
     role: 'assistant',
     content: content,
-    timestamp: new Date().toISOString()
+    timestamp: timestamp
   });
 }
 
@@ -1043,5 +1056,76 @@ voiceStyles.textContent = `
   }
 `;
 document.head.appendChild(voiceStyles);
+
+// ============================================================================
+// SAVE AI CONVERSATION AS NOTE
+// ============================================================================
+
+async function saveAIConversationAsNote(messageId) {
+  try {
+    // Find the message and its context
+    const messageIndex = STATE.aiAssistant.messages.findIndex(m => 
+      (m.timestamp || Date.now()).toString() === messageId.toString()
+    );
+    
+    if (messageIndex === -1) {
+      showNotification('No se pudo encontrar el mensaje', 'error');
+      return;
+    }
+    
+    const aiMessage = STATE.aiAssistant.messages[messageIndex];
+    const userMessage = messageIndex > 0 ? STATE.aiAssistant.messages[messageIndex - 1] : null;
+    
+    // Build note content with context
+    let noteContent = '';
+    if (userMessage && userMessage.role === 'user') {
+      noteContent += `<strong>Mi pregunta:</strong>\n${userMessage.content}\n\n`;
+    }
+    noteContent += `<strong>Respuesta de GAL IA:</strong>\n${aiMessage.content}`;
+    
+    // Extract a title from the content (first 60 chars)
+    const plainText = noteContent.replace(/<[^>]*>/g, '').trim();
+    const title = plainText.substring(0, 60) + (plainText.length > 60 ? '...' : '');
+    
+    // Detect category based on content
+    let category = 'otro';
+    const content_lower = plainText.toLowerCase();
+    if (content_lower.includes('lead') || content_lower.includes('venta') || content_lower.includes('cliente')) {
+      category = 'estrategia';
+    } else if (content_lower.includes('reunión') || content_lower.includes('reunion')) {
+      category = 'reunion';
+    } else if (content_lower.includes('llamada') || content_lower.includes('contactar')) {
+      category = 'llamada';
+    } else if (content_lower.includes('idea') || content_lower.includes('propuesta')) {
+      category = 'idea';
+    } else if (content_lower.includes('seguimiento') || content_lower.includes('recordatorio')) {
+      category = 'seguimiento';
+    }
+    
+    // Save note via API
+    const response = await apiCall('/notes', {
+      method: 'POST',
+      body: JSON.stringify({
+        title: title,
+        content: noteContent,
+        category: category,
+        priority: 'medium',
+        tags: JSON.stringify(['galia', 'conversacion-ia'])
+      })
+    });
+    
+    showNotification('💾 Conversación guardada como nota', 'success');
+    
+    // If we're in notes view, reload notes
+    if (STATE.currentView === 'notes') {
+      await loadNotes();
+      render();
+    }
+    
+  } catch (error) {
+    console.error('Error saving conversation as note:', error);
+    showNotification('Error al guardar la nota: ' + error.message, 'error');
+  }
+}
 
 console.log('✅ GAL IA - Asistente de IA con reconocimiento de voz cargado');
