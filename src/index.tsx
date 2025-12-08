@@ -77,6 +77,61 @@ app.get('/', (c) => {
             transform: translateX(4px);
             transition: all 0.3s ease;
           }
+          
+          /* Estilos globales para botones con branding Galia */
+          .bg-galia-purple,
+          button.bg-galia-purple {
+            background: linear-gradient(135deg, #572c83 0%, #08a48d 100%) !important;
+            border: none !important;
+            color: white !important;
+            font-weight: 500 !important;
+            transition: all 0.3s ease !important;
+            box-shadow: 0 2px 8px rgba(87, 44, 131, 0.2) !important;
+          }
+          
+          .bg-galia-purple:hover,
+          button.bg-galia-purple:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 16px rgba(87, 44, 131, 0.35) !important;
+            opacity: 1 !important;
+          }
+          
+          /* Botones primarios genéricos */
+          .btn-primary {
+            background: linear-gradient(135deg, #572c83 0%, #08a48d 100%) !important;
+            border: none !important;
+            color: white !important;
+            padding: 0.5rem 1rem !important;
+            border-radius: 0.5rem !important;
+            font-weight: 500 !important;
+            cursor: pointer !important;
+            transition: all 0.3s ease !important;
+            box-shadow: 0 2px 8px rgba(87, 44, 131, 0.2) !important;
+          }
+          
+          .btn-primary:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 16px rgba(87, 44, 131, 0.35) !important;
+          }
+          
+          /* Botones secundarios */
+          .btn-secondary {
+            background: white !important;
+            border: 2px solid #572c83 !important;
+            color: #572c83 !important;
+            padding: 0.5rem 1rem !important;
+            border-radius: 0.5rem !important;
+            font-weight: 500 !important;
+            cursor: pointer !important;
+            transition: all 0.3s ease !important;
+          }
+          
+          .btn-secondary:hover {
+            background: #572c83 !important;
+            color: white !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 4px 12px rgba(87, 44, 131, 0.25) !important;
+          }
         </style>
     </head>
     <body style="margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif;">
@@ -100,18 +155,18 @@ app.get('/', (c) => {
             }
         </style>
         
-        <script src="/static/full-app.js?v=20251206d"></script>
-        <script src="/static/leads.js?v=20251206d"></script>
-        <script src="/static/modals.js?v=20251206d"></script>
-        <script src="/static/detail-views.js?v=20251206d"></script>
-        <script src="/static/edit-delete.js?v=20251206d"></script>
-        <script src="/static/resources-folders.js?v=20251206d"></script>
-        <script src="/static/calendar-views.js?v=20251206d"></script>
+        <script src="/static/full-app.js?v=20251208buttons"></script>
+        <script src="/static/leads.js?v=20251208buttons"></script>
+        <script src="/static/modals.js?v=20251208buttons"></script>
+        <script src="/static/detail-views.js?v=20251208buttons"></script>
+        <script src="/static/edit-delete.js?v=20251208buttons"></script>
+        <script src="/static/resources-folders.js?v=20251208buttons"></script>
+        <script src="/static/calendar-views.js?v=20251208buttons"></script>
         <!-- <script src="/static/documents.js"></script> --> <!-- Temporalmente deshabilitado -->
-        <script src="/static/resources.js?v=20251206d"></script>
-        <script src="/static/notes.js?v=20251206d"></script>
-        <script src="/static/ai-assistant.js?v=20251206d"></script>
-        <script src="/static/galia-app.js?v=20251206d"></script>
+        <script src="/static/resources.js?v=20251208buttons"></script>
+        <script src="/static/notes.js?v=20251208buttons"></script>
+        <script src="/static/ai-assistant.js?v=20251208buttons"></script>
+        <script src="/static/galia-app.js?v=20251208buttons"></script>
     </body>
     </html>
   `);
