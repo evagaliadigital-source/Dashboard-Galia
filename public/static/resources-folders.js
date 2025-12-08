@@ -122,10 +122,20 @@ function renderResources() {
           📚 Biblioteca de Recursos
         </h1>
         <div style="display: flex; gap: 0.75rem;">
-          <button onclick="showNewFolderModal()" style="background: #7B5FB8; color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; border: none; cursor: pointer; font-weight: 600;">
+          <button 
+            onclick="showNewFolderModal()" 
+            style="background: linear-gradient(135deg, #572c83 0%, #08a48d 100%); color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; border: none; cursor: pointer; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(87, 44, 131, 0.2);"
+            onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(87, 44, 131, 0.35)';"
+            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(87, 44, 131, 0.2)';"
+          >
             📁 Nueva Carpeta
           </button>
-          <button onclick="showNewResourceModal()" style="background: linear-gradient(135deg, #7B5FB8 0%, #00D9C0 100%); color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; border: none; cursor: pointer; font-weight: 600;">
+          <button 
+            onclick="showNewResourceModal()" 
+            style="background: linear-gradient(135deg, #572c83 0%, #08a48d 100%); color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; border: none; cursor: pointer; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(87, 44, 131, 0.2);"
+            onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(87, 44, 131, 0.35)';"
+            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(87, 44, 131, 0.2)';"
+          >
             ➕ Subir Recurso
           </button>
         </div>
@@ -240,10 +250,20 @@ function renderEmptyFolder() {
       <h3 style="font-size: 1.5rem; font-weight: 600; color: #374151; margin: 0 0 0.5rem 0;">Carpeta vacía</h3>
       <p style="color: #6B7280; margin: 0 0 1.5rem 0;">Crea subcarpetas o sube recursos para organizarlos</p>
       <div style="display: flex; gap: 1rem; justify-content: center;">
-        <button onclick="showNewFolderModal()" style="background: #7B5FB8; color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; border: none; cursor: pointer; font-weight: 600;">
+        <button 
+          onclick="showNewFolderModal()" 
+          style="background: linear-gradient(135deg, #572c83 0%, #08a48d 100%); color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; border: none; cursor: pointer; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(87, 44, 131, 0.2);"
+          onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(87, 44, 131, 0.35)';"
+          onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(87, 44, 131, 0.2)';"
+        >
           📁 Nueva Carpeta
         </button>
-        <button onclick="showNewResourceModal()" style="background: linear-gradient(135deg, #7B5FB8 0%, #00D9C0 100%); color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; border: none; cursor: pointer; font-weight: 600;">
+        <button 
+          onclick="showNewResourceModal()" 
+          style="background: linear-gradient(135deg, #572c83 0%, #08a48d 100%); color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; border: none; cursor: pointer; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(87, 44, 131, 0.2);"
+          onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(87, 44, 131, 0.35)';"
+          onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(87, 44, 131, 0.2)';"
+        >
           ➕ Subir Recurso
         </button>
       </div>

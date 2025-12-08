@@ -66,7 +66,7 @@ function renderResources() {
         <button 
           onclick="document.getElementById('file-input-resources').click()"
           style="
-            background: linear-gradient(135deg, #7B5FB8 0%, #00D9C0 100%);
+            background: linear-gradient(135deg, #572c83 0%, #08a48d 100%);
             color: white;
             padding: 0.75rem 1.5rem;
             border-radius: 0.5rem;
@@ -76,8 +76,12 @@ function renderResources() {
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            box-shadow: 0 4px 6px rgba(123, 95, 184, 0.3);
-          ">
+            box-shadow: 0 2px 8px rgba(87, 44, 131, 0.2);
+            transition: all 0.3s ease;
+          "
+          onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(87, 44, 131, 0.35)';"
+          onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(87, 44, 131, 0.2)';"
+        >
           📤 Subir Recurso
         </button>
         <input 
