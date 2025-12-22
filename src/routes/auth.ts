@@ -28,9 +28,12 @@ auth.post('/login', async (c) => {
 
   const token = createToken(user.id as number, user.role as string);
   
+  // Detect if we're on HTTPS
+  const isSecure = c.req.url.startsWith('https://');
+  
   setCookie(c, 'auth_token', token, {
     httpOnly: true,
-    secure: true,
+    secure: isSecure,
     sameSite: 'Lax',
     maxAge: 7 * 24 * 60 * 60, // 7 days
     path: '/'
@@ -50,9 +53,11 @@ auth.post('/login', async (c) => {
 
 // Logout
 auth.post('/logout', (c) => {
+  const isSecure = c.req.url.startsWith('https://');
+  
   setCookie(c, 'auth_token', '', {
     httpOnly: true,
-    secure: true,
+    secure: isSecure,
     maxAge: 0,
     path: '/'
   });
