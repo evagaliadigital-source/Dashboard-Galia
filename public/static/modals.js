@@ -2337,4 +2337,28 @@ modalStyles.textContent = `
 `;
 document.head.appendChild(modalStyles);
 
+// ============================================
+// FUNCIÓN GLOBAL PARA MOSTRAR MODALES GENÉRICOS
+// ============================================
+function showModal(title, content, width = '600px') {
+  const overlay = createModalOverlay();
+  const container = createModalContainer(title, width);
+  
+  container.innerHTML = `
+    <div style="padding: 1.5rem 2rem; border-bottom: 1px solid #E5E7EB;">
+      <h3 style="font-size: 1.25rem; font-weight: 600; color: #1F2937;">${title}</h3>
+    </div>
+    <div style="padding: 1.5rem 2rem;">
+      ${content}
+    </div>
+  `;
+  
+  overlay.appendChild(container);
+  document.body.appendChild(overlay);
+}
+
+// Exportar funciones globalmente
+window.showModal = showModal;
+window.closeModal = closeModal;
+
 console.log('✅ Sistema de modales Galia Digital cargado');
